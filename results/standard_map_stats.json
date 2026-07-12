@@ -1,0 +1,77 @@
+{
+  "T": 1000,
+  "chaos_thresh": 5.0,
+  "grid": 360,
+  "per_K": {
+    "0.5": {
+      "chaos_frac_grid": 0.01354938271604933,
+      "chaos_frac_line": 0.03611111111111111,
+      "regular_frac_grid": 0.9864506172839507,
+      "n_boundary_4to6": 3083,
+      "n_total": 129600,
+      "dig_median_regular": 11.46235093221196,
+      "dig_median_chaotic": 3.3182518341042324,
+      "sweep_seconds": 15.40354061126709
+    },
+    "0.9716": {
+      "chaos_frac_grid": 0.37494598765432097,
+      "chaos_frac_line": 0.5277777777777778,
+      "regular_frac_grid": 0.625054012345679,
+      "n_boundary_4to6": 12911,
+      "n_total": 129600,
+      "dig_median_regular": 10.179740080983153,
+      "dig_median_chaotic": 3.234257771065171,
+      "sweep_seconds": 15.95826268196106
+    },
+    "1.2": {
+      "chaos_frac_grid": 0.5756095679012345,
+      "chaos_frac_line": 0.6805555555555556,
+      "regular_frac_grid": 0.4243904320987654,
+      "n_boundary_4to6": 2139,
+      "n_total": 129600,
+      "dig_median_regular": 11.44667402496804,
+      "dig_median_chaotic": 2.6175247582377543,
+      "sweep_seconds": 16.726445198059082
+    },
+    "2.0": {
+      "chaos_frac_grid": 0.7392746913580247,
+      "chaos_frac_line": 0.75,
+      "regular_frac_grid": 0.2607253086419753,
+      "n_boundary_4to6": 502,
+      "n_total": 129600,
+      "dig_median_regular": 12.14426916274619,
+      "dig_median_chaotic": 1.8976393727303504,
+      "sweep_seconds": 17.141262531280518
+    },
+    "3.0": {
+      "chaos_frac_grid": 0.8801543209876543,
+      "chaos_frac_line": 1.0,
+      "regular_frac_grid": 0.11984567901234568,
+      "n_boundary_4to6": 265,
+      "n_total": 129600,
+      "dig_median_regular": 12.881503679594324,
+      "dig_median_chaotic": 1.5849476510612868,
+      "sweep_seconds": 18.050477981567383
+    },
+    "6.9": {
+      "chaos_frac_grid": 0.9957793209876543,
+      "chaos_frac_line": 1.0,
+      "regular_frac_grid": 0.004220679012345679,
+      "n_boundary_4to6": 149,
+      "n_total": 129600,
+      "dig_median_regular": 10.308730478617228,
+      "dig_median_chaotic": 1.309049405896813,
+      "sweep_seconds": 19.27004885673523
+    }
+  },
+  "wba_vs_lyapunov": {
+    "K": 6.9,
+    "n": 14400,
+    "agreement": 0.9998611111111111,
+    "wba_regular_frac": 0.0043055555555555555,
+    "lyap_regular_frac": 0.004166666666666667,
+    "t_wba_seconds": 2.1247198581695557,
+    "t_lyap_seconds": 2.6286799907684326,
+    "speedup_lyap_over_wba": 1.2371889784251549
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "K": 6.9,
+  "T": 1000,
+  "theta_star": 1.9968432483291705,
+  "trace": -0.8515929575664494,
+  "island": {
+    "n_regular_in_zoom": 11755,
+    "n_island": 11743,
+    "rot_island": 7.08580195215278e-18,
+    "island_area": 0.07786991839967582,
+    "island_area_fraction_of_torus": 0.001972468075596853,
+    "island_area_fraction_pct": 0.19724680755968527,
+    "quoted_D1_pct": 0.37,
+    "dig_median_island": 10.431216644991725,
+    "island_frac_full_torus_pct": 0.40480000000000005,
+    "regular_frac_full_torus_pct": 0.406
+  },
+  "line_vs_grid": {
+    "grid_island_frac_pct": 0.40480000000000005,
+    "grid_chaos_frac": 0.99594,
+    "lines": {
+      "p0=0_line": {
+        "chaos_frac": 0.906,
+        "n_island_hits": 188
+      },
+      "theta0=0_line": {
+        "chaos_frac": 1.0,
+        "n_island_hits": 0
+      },
+      "theta0=0.15_line": {
+        "chaos_frac": 0.9995,
+        "n_island_hits": 1
+      }
+    }
+  }
+}
