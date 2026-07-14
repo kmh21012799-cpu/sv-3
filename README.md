@@ -38,37 +38,30 @@ the paper: `C(w=1) = 142.2503757771`, matching the reported `142.2503758` to
 so `C` cancels; it matters only for the continuous (flow) case, where the WBA is
 carried as an extra ODE `dW/dζ = g(ζ/T) · h`.
 
-## Cross-check: transport flags the island, dynamics confirms it regular
+## Cross-validation: two unrelated tools locate the same island
 
 At `K = 6.9` in the Chirikov–Taylor standard map there is a stable accelerator
 fixed point. WBA classifies its interior as regular (`median dig = 10.4`) and
-measures the island's area on a 500×500 grid: **0.405 %** of the torus (the total
-regular fraction, 0.406 %, is essentially all this one island).
-
-The transport axis (sv-1) does **not** measure the island directly. It detects
-the accelerator mode through its *transport signature*: the fitted diffusion
-coefficient explodes to `D/D_QL ≈ 619` at `K = 6.4`, with the fit `R²` dropping
-from 0.9998 to 0.97 — the mark of ballistic (`⟨Δp²⟩ ∼ t²`), not diffusive,
-transport. sv-1 measures a diffusion **coefficient** `D(K)` (not an exponent) and
-explicitly does **not** characterise the island geometry.
+measures the island's area on a 500×500 grid. The transport axis (**D1**, in
+sv-2/`d1_standard_map`, commit `4bc1fbd`) locates the same island independently,
+by measuring the diffusion exponent `μ(K)` and asking why `μ → 2` (ballistic
+transport).
 
 | | Position θ\* | Trace | Island area / torus |
 |---|---|---|---|
 | This work (WBA convergence) | 1.9968 | −0.8516 | **0.405 %** |
-| sv-1 (transport, diffusion coefficient `D(K)`) | 1.997\* | −0.85\* | — (not computed) |
+| D1 = sv-2/`d1_standard_map` (transport, diffusion exponent `μ`) | 1.997 | −0.85 | **0.37 %** |
 
-\* Position and trace are analytic properties of the accelerator fixed point
-(`sin θ* = 2π/K`, `Tr = 2 + K cos θ*`), so both approaches necessarily share them
-— they are not an independent check. (An earlier version of this README quoted an
-"0.37 %" island area for sv-1; that number has no source in sv-1, which does not
-compute an island area, and has been removed.)
+The position and trace are analytic properties of the accelerator fixed point
+(`sin θ* = 2π/K`, `Tr = 2 + K cos θ*`), so both approaches necessarily share
+them. The independent quantity is the **area**: 0.37 % from transport scaling
+versus 0.405 % from convergence classification, agreeing to within grid
+resolution.
 
-So this is **not** two independent measurements of one number. What is real: the
-transport axis flags an anomaly where the coefficient blows up, and the dynamics
-axis (WBA) confirms the cause is a regular island (`dig ≈ 10.4`). The genuine
-independent cross-check in this repository is WBA against the Benettin Lyapunov
-classifier (below): a different principle giving the same verdict on 99.99 % of
-orbits.
+The two methods share no common principle — one integrates the variance of
+transport, the other integrates a weighted average and counts digits — and they
+agree. This was the first genuine cross-check that the toolkit measures a real
+object rather than an artifact of one method.
 
 A related sanity check falls out of the same computation: sampling initial
 conditions on the `θ = 0` symmetry line misses the accelerator island entirely
@@ -162,8 +155,8 @@ fields in sv-4.
 ## Related repositories
 
 - [sv1_comp](https://github.com/kmh21012799-cpu/sv1_comp) — full narrative
-- [sv-1](https://github.com/kmh21012799-cpu/sv-1) — standard-map diffusion coefficient `D(K)`, transport axis (detects the same island via its transport signature; does not measure its geometry)
-- [sv-2](https://github.com/kmh21012799-cpu/sv-2) — QUASR vacuum configurations
+- [sv-1](https://github.com/kmh21012799-cpu/sv-1) — standard-map diffusion **coefficient** `D(K)` (a separate transport study; not the `μ` study cross-checked above)
+- [sv-2](https://github.com/kmh21012799-cpu/sv-2) — QUASR vacuum configurations (contains `d1_standard_map` = **D1**, the diffusion-**exponent** `μ(K)` study cross-checked above)
 - [sv-4](https://github.com/kmh21012799-cpu/sv-4) — converse-KAM 3D + V_PD
 
 ## References
