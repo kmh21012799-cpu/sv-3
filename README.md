@@ -38,29 +38,37 @@ the paper: `C(w=1) = 142.2503757771`, matching the reported `142.2503758` to
 so `C` cancels; it matters only for the continuous (flow) case, where the WBA is
 carried as an extra ODE `dW/dζ = g(ζ/T) · h`.
 
-## Cross-validation: two unrelated tools locate the same island
+## Cross-check: transport flags the island, dynamics confirms it regular
 
 At `K = 6.9` in the Chirikov–Taylor standard map there is a stable accelerator
 fixed point. WBA classifies its interior as regular (`median dig = 10.4`) and
-measures the island's area on a 500×500 grid. The transport axis (sv-1) locates
-the same island independently, by measuring the diffusion exponent `μ(K)` and
-asking why `μ → 2` (ballistic transport).
+measures the island's area on a 500×500 grid: **0.405 %** of the torus (the total
+regular fraction, 0.406 %, is essentially all this one island).
+
+The transport axis (sv-1) does **not** measure the island directly. It detects
+the accelerator mode through its *transport signature*: the fitted diffusion
+coefficient explodes to `D/D_QL ≈ 619` at `K = 6.4`, with the fit `R²` dropping
+from 0.9998 to 0.97 — the mark of ballistic (`⟨Δp²⟩ ∼ t²`), not diffusive,
+transport. sv-1 measures a diffusion **coefficient** `D(K)` (not an exponent) and
+explicitly does **not** characterise the island geometry.
 
 | | Position θ\* | Trace | Island area / torus |
 |---|---|---|---|
 | This work (WBA convergence) | 1.9968 | −0.8516 | **0.405 %** |
-| sv-1 (transport, diffusion exponent) | 1.997 | −0.85 | **0.37 %** |
+| sv-1 (transport, diffusion coefficient `D(K)`) | 1.997\* | −0.85\* | — (not computed) |
 
-The position and trace are analytic properties of the accelerator fixed point
-(`sin θ* = 2π/K`, `Tr = 2 + K cos θ*`), so both approaches necessarily share
-them. The independent quantity is the **area**: 0.37 % from transport scaling
-versus 0.405 % from convergence classification, agreeing to within grid
-resolution.
+\* Position and trace are analytic properties of the accelerator fixed point
+(`sin θ* = 2π/K`, `Tr = 2 + K cos θ*`), so both approaches necessarily share them
+— they are not an independent check. (An earlier version of this README quoted an
+"0.37 %" island area for sv-1; that number has no source in sv-1, which does not
+compute an island area, and has been removed.)
 
-The two methods share no common principle — one integrates the variance of
-transport, the other integrates a weighted average and counts digits — and they
-agree. This was the first genuine cross-check that the toolkit measures a real
-object rather than an artifact of one method.
+So this is **not** two independent measurements of one number. What is real: the
+transport axis flags an anomaly where the coefficient blows up, and the dynamics
+axis (WBA) confirms the cause is a regular island (`dig ≈ 10.4`). The genuine
+independent cross-check in this repository is WBA against the Benettin Lyapunov
+classifier (below): a different principle giving the same verdict on 99.99 % of
+orbits.
 
 A related sanity check falls out of the same computation: sampling initial
 conditions on the `θ = 0` symmetry line misses the accelerator island entirely
@@ -154,7 +162,7 @@ fields in sv-4.
 ## Related repositories
 
 - [sv1_comp](https://github.com/kmh21012799-cpu/sv1_comp) — full narrative
-- [sv-1](https://github.com/kmh21012799-cpu/sv-1) — standard-map diffusion, transport axis (locates the same island)
+- [sv-1](https://github.com/kmh21012799-cpu/sv-1) — standard-map diffusion coefficient `D(K)`, transport axis (detects the same island via its transport signature; does not measure its geometry)
 - [sv-2](https://github.com/kmh21012799-cpu/sv-2) — QUASR vacuum configurations
 - [sv-4](https://github.com/kmh21012799-cpu/sv-4) — converse-KAM 3D + V_PD
 

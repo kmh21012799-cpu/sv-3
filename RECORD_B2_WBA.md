@@ -12,6 +12,15 @@ first.
 > flow were all implemented here from scratch (`wba/`). D1's quoted accelerator-
 > island fraction (0.37%) and the μ=1-vs-μ=2 symmetry-line lesson are compared
 > against as **external claims**, not re-derived from D1 code.
+>
+> **Update (verified against sv-1, commit `ecd0c67`): those external D1 claims do
+> not hold.** sv-1 measured a diffusion **coefficient** `D(K)`, not an exponent;
+> it has no "0.37%" island area (it explicitly does not characterise the island
+> geometry) and no μ=1-vs-μ=2 symmetry-line result. The symmetry-line trap in
+> Result 2 below is **real and was measured HERE** (θ₀=0 line: 0 island hits /
+> 2000 pts vs 0.405% on the 2D grid); only the "D1 showed the same thing" framing
+> was an unfounded external claim. sv-1's actual accelerator signature is a
+> transport one: `D/D_QL ≈ 619` at `K=6.4` with `R²` dropping 0.9998→0.97.
 
 ---
 
