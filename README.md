@@ -42,14 +42,15 @@ carried as an extra ODE `dW/dζ = g(ζ/T) · h`.
 
 At `K = 6.9` in the Chirikov–Taylor standard map there is a stable accelerator
 fixed point. WBA classifies its interior as regular (`median dig = 10.4`) and
-measures the island's area on a 500×500 grid. The transport axis (sv-1) locates
-the same island independently, by measuring the diffusion exponent `μ(K)` and
-asking why `μ → 2` (ballistic transport).
+measures the island's area on a 500×500 grid. The transport axis (**D1**, in
+sv-2/`d1_standard_map`, commit `4bc1fbd`) locates the same island independently,
+by measuring the diffusion exponent `μ(K)` and asking why `μ → 2` (ballistic
+transport).
 
 | | Position θ\* | Trace | Island area / torus |
 |---|---|---|---|
 | This work (WBA convergence) | 1.9968 | −0.8516 | **0.405 %** |
-| sv-1 (transport, diffusion exponent) | 1.997 | −0.85 | **0.37 %** |
+| D1 = sv-2/`d1_standard_map` (transport, diffusion exponent `μ`) | 1.997 | −0.85 | **0.37 %** |
 
 The position and trace are analytic properties of the accelerator fixed point
 (`sin θ* = 2π/K`, `Tr = 2 + K cos θ*`), so both approaches necessarily share
@@ -154,8 +155,8 @@ fields in sv-4.
 ## Related repositories
 
 - [sv1_comp](https://github.com/kmh21012799-cpu/sv1_comp) — full narrative
-- [sv-1](https://github.com/kmh21012799-cpu/sv-1) — standard-map diffusion, transport axis (locates the same island)
-- [sv-2](https://github.com/kmh21012799-cpu/sv-2) — QUASR vacuum configurations
+- [sv-1](https://github.com/kmh21012799-cpu/sv-1) — standard-map diffusion **coefficient** `D(K)` (a separate transport study; not the `μ` study cross-checked above)
+- [sv-2](https://github.com/kmh21012799-cpu/sv-2) — QUASR vacuum configurations (contains `d1_standard_map` = **D1**, the diffusion-**exponent** `μ(K)` study cross-checked above)
 - [sv-4](https://github.com/kmh21012799-cpu/sv-4) — converse-KAM 3D + V_PD
 
 ## References

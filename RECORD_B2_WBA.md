@@ -12,6 +12,12 @@ first.
 > flow were all implemented here from scratch (`wba/`). D1's quoted accelerator-
 > island fraction (0.37%) and the μ=1-vs-μ=2 symmetry-line lesson are compared
 > against as **external claims**, not re-derived from D1 code.
+>
+> (D1 here = **sv-2/`d1_standard_map`**, commit `4bc1fbd` — a diffusion-**exponent**
+> μ(K) study. Those external claims are **confirmed there**: the N=1e7 μ→2
+> convergence, the 0.37% trapped fraction, and the K=3.0 grid-μ=2 vs line-μ=1
+> symmetry-line trap. They are external to *this* repo, not unfounded. Note sv-1
+> is a *different* repo — a diffusion-**coefficient** D(K) study — and is not D1.)
 
 ---
 
