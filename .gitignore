@@ -1,2 +1,6 @@
 __pycache__/
 *.pyc
+
+# keep saved result arrays (lesson: do not lose per-point data to PNG)
+!results/*.npz
+!results/*.mat
