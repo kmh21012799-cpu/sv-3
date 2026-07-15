@@ -29,48 +29,40 @@ disagree   = wba_reg ~= lyap_reg;
 agreement  = mean(wba_reg == lyap_reg);
 
 % --- colours (colourblind-safe; no jet) ---
-cReg   = [0.11 0.45 0.74];   % blue  - both regular
+cReg   = [0.11 0.45 0.74];   % blue   - both regular
 cChaos = [0.85 0.37 0.10];   % orange - both chaotic
-cBad   = [0.15 0.15 0.15];   % dark  - disagreement
+cBad   = [0.15 0.15 0.15];   % dark   - disagreement
 
 fig = figure('Units','centimeters','Position',[2 2 12 10],'Color','w');
 ax = axes(fig); hold(ax,'on'); box(ax,'on');
-
-% log-x helps because lambda spans ~1e-3 to ~1.4
-set(ax,'XScale','log');
+set(ax,'XScale','log');       % lambda spans ~1e-3 to ~1.4
 
 scatter(ax, max(lam(both_chaos),1e-4), dig(both_chaos), 6, cChaos, 'filled', ...
         'MarkerFaceAlpha',0.35,'MarkerEdgeColor','none');
-scatter(ax, max(lam(both_reg),1e-4),   dig(both_reg),   10, cReg, 'filled', ...
-        'MarkerFaceAlpha',0.85,'MarkerEdgeColor','none');
+scatter(ax, max(lam(both_reg),1e-4),   dig(both_reg),   12, cReg, 'filled', ...
+        'MarkerFaceAlpha',0.90,'MarkerEdgeColor','none');
 if any(disagree)
     scatter(ax, max(lam(disagree),1e-4), dig(disagree), 42, cBad, 'x', 'LineWidth',1.3);
 end
 
 % classification boundaries
 yl = [-1 16]; xl = [8e-4 2];
-plot(ax, xl, [digcut digcut], 'k--', 'LineWidth',0.8);
-plot(ax, [lamcut lamcut], yl, 'k:',  'LineWidth',0.8);
+plot(ax, xl, [digcut digcut], 'k--', 'LineWidth',0.7);
+plot(ax, [lamcut lamcut], yl, 'k:',  'LineWidth',0.7);
 
 xlim(ax, xl); ylim(ax, yl);
-xlabel(ax, 'Benettin Lyapunov exponent  \lambda');
-ylabel(ax, 'WBA convergence digits  dig_{1000}');
-title(ax, 'WBA vs Lyapunov, standard map  K = 6.9');
+xlabel(ax, '\lambda   (Benettin Lyapunov exponent)');
+ylabel(ax, 'dig_{1000}   (WBA convergence digits)');
 
-% quadrant labels
-text(ax, 1.2e-3, 13.5, 'both regular', 'Color',cReg,'FontWeight','bold','FontSize',9);
-text(ax, 0.25, 1.2, 'both chaotic', 'Color',cChaos,'FontWeight','bold', ...
-     'FontSize',9,'HorizontalAlignment','right');
+% quadrant labels + one concise agreement note, all in empty space
+text(ax, 1.15e-3, 14.4, 'both regular',  'Color',cReg,  'FontWeight','bold','FontSize',10);
+text(ax, 1.55, 2.4, 'both chaotic', 'Color',cChaos,'FontWeight','bold','FontSize',10, ...
+     'HorizontalAlignment','right');
+text(ax, 1.55, 14.4, sprintf('agreement %.2f%%', 100*agreement), ...
+     'Color',[0.25 0.25 0.25],'FontSize',10,'HorizontalAlignment','right');
 
-nboth_reg = sum(both_reg); nboth_chaos = sum(both_chaos); nbad = sum(disagree);
-msg = sprintf(['two independent chaos indicators agree\n' ...
-               'agreement %.2f%% (14,400 ICs)\n' ...
-               'both regular %d  /  both chaotic %d  /  disagree %d'], ...
-               100*agreement, nboth_reg, nboth_chaos, nbad);
-text(ax, 9e-4, -0.2, msg, 'FontSize',8,'VerticalAlignment','top', ...
-     'BackgroundColor',[1 1 1 0.6]);
-
-set(ax,'FontSize',9,'Layer','top','TickDir','out');
+set(ax,'FontSize',10,'Layer','top','TickDir','out');
+set(ax,'XTick',[1e-3 1e-2 1e-1 1e0]);
 
 % many points -> raster the content at 300 dpi, keep vector axes/text
 outpdf = fullfile(here, 'figC1_wba_lyap.pdf');
