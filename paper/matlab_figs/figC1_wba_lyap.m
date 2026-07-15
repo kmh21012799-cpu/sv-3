@@ -1,13 +1,12 @@
 % figC1_wba_lyap.m
 % WBA <-> Lyapunov cross-check for the standard map at K = 6.9.
-% Two independent chaos indicators, computed on the same 120x120 = 14,400
-% grid of initial conditions, are compared point by point:
+% 14,400 initial conditions (120x120 grid); each point compared by two
+% independent chaos indicators:
 %   x-axis: Benettin largest Lyapunov exponent lambda
 %   y-axis: WBA convergence digits dig = -log10 |WBA[0,T]-WBA[T,2T]|
-% Classification boundaries: dig >= 5 (regular, WBA); lambda < 0.03 (regular,
-% Benettin). Points collapse into the two agreeing quadrants
-% (both regular / both chaotic); agreement is 99.99%.
-% All annotation is outside the axes (legend at right).
+% Classification boundaries: dig = 5 (WBA cut); lambda = 0.03 (Benettin cut).
+% Points collapse into the two agreeing quadrants; agreement is 99.99%.
+% Counts and the summary sentence go in the figure CAPTION, not on the axes.
 %
 % Data: paper/data_matlab/sv3_wba_lyap.mat  (dig, lam, thresholds).
 % This is a cross-check, not a discovery.
@@ -32,29 +31,26 @@ agreement  = mean(wba_reg == lyap_reg);
 % --- colours (colourblind-safe; no jet) ---
 cReg   = [0.11 0.45 0.74];   % blue   - both regular
 cChaos = [0.85 0.37 0.10];   % orange - both chaotic
-cBad   = [0.15 0.15 0.15];   % dark   - disagreement
+cBad   = [0.10 0.10 0.10];   % black  - disagreement
+cGrid  = [0.45 0.45 0.45];   % grey   - boundary-line labels
 
-fig = figure('Units','centimeters','Position',[2 2 14 9],'Color','w');
+fig = figure('Units','centimeters','Position',[2 2 12 9.5],'Color','w');
 ax = axes(fig); hold(ax,'on'); box(ax,'on');
 set(ax,'XScale','log');       % lambda spans ~1e-3 to ~1.4
 
-h1 = scatter(ax, max(lam(both_chaos),1e-4), dig(both_chaos), 6, cChaos, 'filled', ...
-        'MarkerFaceAlpha',0.35,'MarkerEdgeColor','none', ...
-        'DisplayName',sprintf('both chaotic (%d)', sum(both_chaos)));
-h2 = scatter(ax, max(lam(both_reg),1e-4),   dig(both_reg),   14, cReg, 'filled', ...
-        'MarkerFaceAlpha',0.90,'MarkerEdgeColor','none', ...
-        'DisplayName',sprintf('both regular (%d)', sum(both_reg)));
-hs = [h1 h2];
+% dense chaotic cloud: small marker + low alpha so it does not smear
+scatter(ax, max(lam(both_chaos),1e-4), dig(both_chaos), 5, cChaos, 'filled', ...
+        'MarkerFaceAlpha',0.22,'MarkerEdgeColor','none');
+scatter(ax, max(lam(both_reg),1e-4),   dig(both_reg),   16, cReg, 'filled', ...
+        'MarkerFaceAlpha',0.90,'MarkerEdgeColor','none');
 if any(disagree)
-    h3 = scatter(ax, max(lam(disagree),1e-4), dig(disagree), 42, cBad, 'x', ...
-        'LineWidth',1.3, 'DisplayName',sprintf('disagree (%d)', sum(disagree)));
-    hs = [h1 h2 h3];
+    scatter(ax, max(lam(disagree),1e-4), dig(disagree), 46, cBad, 'x', 'LineWidth',1.4);
 end
 
-% classification boundaries (kept out of the legend)
+% classification boundaries (labelled)
 yl = [-1 16]; xl = [8e-4 2];
-plot(ax, xl, [digcut digcut], 'k--', 'LineWidth',0.7, 'HandleVisibility','off');
-plot(ax, [lamcut lamcut], yl, 'k:',  'LineWidth',0.7, 'HandleVisibility','off');
+plot(ax, xl, [digcut digcut], '--', 'Color',cGrid, 'LineWidth',0.7, 'HandleVisibility','off');
+plot(ax, [lamcut lamcut], yl, ':',  'Color',cGrid, 'LineWidth',0.9, 'HandleVisibility','off');
 
 xlim(ax, xl); ylim(ax, yl);
 xlabel(ax, '\lambda   (Benettin Lyapunov exponent)');
@@ -62,10 +58,18 @@ ylabel(ax, 'dig_{1000}   (WBA convergence digits)');
 set(ax,'FontSize',10,'Layer','top','TickDir','out');
 set(ax,'XTick',[1e-3 1e-2 1e-1 1e0]);
 
-% all text outside the axes: legend at right, agreement as its title
-lgd = legend(hs, 'Location','eastoutside');
-lgd.Title.String = sprintf('agreement %.2f%%', 100*agreement);
-lgd.FontSize = 9;
+% --- in-axes text: cluster labels + one agreement line + boundary labels only ---
+text(ax, 1.15e-3, 14.6, 'both regular',  'Color',cReg,  'FontWeight','bold','FontSize',10);
+text(ax, 1.75,    2.4,  'both chaotic',  'Color',cChaos,'FontWeight','bold','FontSize',10, ...
+     'HorizontalAlignment','right');
+text(ax, 1.75,   14.6,  '99.99% agreement', 'Color',[0.2 0.2 0.2],'FontSize',10, ...
+     'HorizontalAlignment','right');
+text(ax, 1.75,    6.4,  'disagree', 'Color',cBad,'FontSize',9, ...
+     'HorizontalAlignment','right');
+% boundary-line labels
+text(ax, 9.2e-4, 5.5, 'dig = 5', 'Color',cGrid,'FontSize',8.5,'FontAngle','italic', ...
+     'VerticalAlignment','bottom');
+text(ax, 0.034, 8.5, '\lambda = 0.03', 'Color',cGrid,'FontSize',8.5,'FontAngle','italic');
 
 % many points -> raster the content at 300 dpi, keep vector axes/text
 outpdf = fullfile(here, 'figC1_wba_lyap.pdf');
